@@ -5,7 +5,7 @@ Ao final do processo é possível pesquisar por um endpoint GET qualquer CEP Bra
 ## Stack
 -> Java 11+<br>
 -> MySQL<br>
--> Spring Framework, Spring DATA<br>
+-> Spring Family<br>
 -> Docker<br>
 
 ## Para executar

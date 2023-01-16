@@ -1,20 +1,20 @@
-## hub-delivery-correios
-Essa API é responsável por baixar [aqui](https://github.com/miltonhit/miltonhit/raw/main/public-assets/cep-20190602.csv) todos os endereços Brasileiros e inputar em uma base de dados MySQL.
+## hub-correios-api
+Essa API é responsável por baixar [aqui](https://github.com/miltonhit/miltonhit/raw/main/public-assets/cep-20190602.csv) todos os endereços Brasileiros e inputar em uma base de dados MySQL.<br>
 Ao final do processo é possível pesquisar por um endpoint GET qualquer CEP Brasileiro.
 
 ## Stack
--> Java 11+
--> MySQL
--> Spring Framework, Spring DATA
--> Docker
+-> Java 11+<br>
+-> MySQL<br>
+-> Spring Framework, Spring DATA<br>
+-> Docker<br>
 
 ## Para executar
-Será um Docker-Compose com o spring e MySQL.
+Será um Docker-Compose com o spring e MySQL.<br>
 Ainda em construção.
 
 ## Rotas
-GET /status
-GET zip/{zipcode}
+GET /status<br>
+GET zip/{zipcode}<br>
 
 ## Exemplo
 ###### curl http://localhost:7000/zip/03358150

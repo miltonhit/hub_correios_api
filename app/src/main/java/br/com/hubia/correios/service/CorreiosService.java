@@ -9,6 +9,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import br.com.hubia.correios.SpringApp;
 import br.com.hubia.correios.exception.NoContentException;
 import br.com.hubia.correios.exception.NotReadyException;
 import br.com.hubia.correios.model.Address;
@@ -20,7 +21,7 @@ import br.com.hubia.correios.repository.SetupRepository;
 
 @Service
 public class CorreiosService {
-	private static Logger LOGGER = LoggerFactory.getLogger(CorreiosService.class);
+	private static Logger logger = LoggerFactory.getLogger(CorreiosService.class);
 	
 	@Autowired
 	private AddressRepository addressRepository;
@@ -49,33 +50,38 @@ public class CorreiosService {
 	
     @Async
     @EventListener(ApplicationStartedEvent.class)
-	protected synchronized void setup() throws Exception {
-		LOGGER.info("---");
-		LOGGER.info("---");
-		LOGGER.info("--- STARTING SETUP");
-		LOGGER.info("--- Please wait... This may take a few minutes");
-		LOGGER.info("---");
-		LOGGER.info("---");
-		if (this.getStatus().equals(Status.NEED_SETUP)) { // If not running, starts it.
-			this.saveServiceStatus(Status.SETUP_RUNNING);
-			
-			//
-			// Download CSV content
-			// From origin
-			// And send it to MySQL
-			this.addressRepository.saveAll(
-					setupRepository.listAdressesFromOrigin());
-			
-			//
-			// Set service READY!
-			this.saveServiceStatus(Status.READY);
-		}
+	protected synchronized void setup() {
+		logger.info("---");
+		logger.info("---");
+		logger.info("--- STARTING SETUP");
+		logger.info("--- Please wait... This may take a few minutes");
+		logger.info("---");
+		logger.info("---");
 		
-		LOGGER.info("---");
-		LOGGER.info("---");
-		LOGGER.info("--- READY TO USE");
-		LOGGER.info("--- Good luck my friend :)");
-		LOGGER.info("---");
-		LOGGER.info("---");
+		try {
+			if (this.getStatus().equals(Status.NEED_SETUP)) { // If not running, starts it.
+				this.saveServiceStatus(Status.SETUP_RUNNING);
+				
+				//
+				// Download CSV content
+				// From origin and saves it.
+				this.addressRepository.saveAll(
+						setupRepository.listAdressesFromOrigin());
+				
+				//
+				// Set service READY!
+				this.saveServiceStatus(Status.READY);
+			}
+			
+			logger.info("---");
+			logger.info("---");
+			logger.info("--- READY TO USE");
+			logger.info("--- Good luck my friend :)");
+			logger.info("---");
+			logger.info("---");
+		} catch(Exception exc) {
+			logger.error("Error to download/save addresses, closing the application....", exc);
+			SpringApp.close(999);
+		}
 	}
 }

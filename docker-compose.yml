@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  mysqldb:
+    image: mysql:5.7
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=root
+    ports:
+      - 3307:3306
+    command: --init-file /data/application/init.sql
+    volumes:
+      - db:/var/lib/mysql
+      - ./mysql/init.sql:/data/application/init.sql
+  app:
+    depends_on:
+      - mysqldb
+    build: ./app
+    restart: on-failure
+    ports:
+      - 6868:8080
+    environment:
+      SPRING_APPLICATION_JSON: '{
+        "spring.datasource.url"  : "jdbc:mysql://mysqldb:3306/correios?useSSL=false",
+        "spring.datasource.username" : "root",
+        "spring.datasource.password" : "root",
+        "spring.jpa.hibernate.ddl-auto" : "update"
+      }'
+    volumes:
+      - .m2:/root/.m2
+    stdin_open: true
+    tty: true
+
+volumes:
+  db:

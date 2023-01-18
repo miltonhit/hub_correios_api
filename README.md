@@ -20,8 +20,8 @@ Uma stack com Lambda e DynamoDB cairia muito bem também :)
 -> org.mock-server<br>
 -> com.h2database
 
-## Para buildar e executar
--> docker-compose up<br><br>
+## Para compilar e testar
+Execute no terminal: docker-compose up<br><br>
 **Importante:** Ao buildar e subir a API, ela pode demora de 3 a 5 minutos para baixar todos os CEPs e inserir no MySQL.<br>
 Enquanto esse **setup** não termina, você vai receber o erro *503*, conforme exemplo abaixo.
 

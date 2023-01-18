@@ -4,6 +4,7 @@ package br.com.hubia.correios.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
@@ -32,6 +33,13 @@ public class CorreiosService {
 	@Autowired
 	private SetupRepository setupRepository;
 	
+	@Value("${setup.on.startup}")
+	private boolean setupOnStartup;
+	
+	@Value("${spring.datasource.url}")
+	private String a;
+	
+	
 	public Status getStatus() {
 		return statusRepository.findById(AddressStatus.DEFAULT_ID)
 				.orElse(AddressStatus.builder().status(Status.NEED_SETUP).build()).getStatus();
@@ -47,11 +55,17 @@ public class CorreiosService {
 	private void saveServiceStatus(Status status) {
 		statusRepository.save(AddressStatus.builder().id(AddressStatus.DEFAULT_ID).status(status).build());
 	}
-	
+
     @Async
     @EventListener(ApplicationStartedEvent.class)
-	protected synchronized void setup() {
-		logger.info("---");
+	protected void setupOnStartup() {
+		if (setupOnStartup) {
+			this.setup();
+		}
+	}
+	
+	public synchronized void setup() {
+		logger.info("---" + a);
 		logger.info("---");
 		logger.info("--- STARTING SETUP");
 		logger.info("--- Please wait... This may take a few minutes");

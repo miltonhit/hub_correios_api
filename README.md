@@ -15,6 +15,11 @@ Depois do setup é possível pesquisar de forma fácil, via API REST, qualquer c
 Utilizei essa Stack apenas para demonstrar o meu conhecimento em spring data, mysql e docker-compose.
 Uma stack com Lambda e DynamoDB cairia muito bem também :)
 
+## Cobertura de testes
+100% coberto por testes de integrações, utilizando:<br>
+-> org.mock-server<br>
+-> com.h2database
+
 ## Para buildar e executar
 -> docker-compose up<br>
 **!!Importante!!** Ao buildar e subir a API, ela pode demora de 3 a 5 minutos para baixar todos os CEPs e inserir no MySQL.<br>

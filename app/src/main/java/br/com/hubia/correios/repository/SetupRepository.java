@@ -18,7 +18,7 @@ import br.com.hubia.correios.model.Address;
 @Repository
 public class SetupRepository {
 
-	@Value("${zipcode.fromcorreios.download.url}")
+	@Value("${setup.origin.url}")
 	private String completeUrl;
 
 	public List<Address> listAdressesFromOrigin() throws Exception {

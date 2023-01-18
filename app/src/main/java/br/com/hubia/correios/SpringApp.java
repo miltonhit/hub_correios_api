@@ -1,8 +1,11 @@
 package br.com.hubia.correios;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableAsync;
 
@@ -18,5 +21,10 @@ public class SpringApp {
 	
 	public static void close(int code) {
 		SpringApplication.exit(ctx, () -> code);
+	}
+	
+	@Bean
+	public HttpClient httpClient() {
+		return HttpClients.createMinimal();
 	}
 }

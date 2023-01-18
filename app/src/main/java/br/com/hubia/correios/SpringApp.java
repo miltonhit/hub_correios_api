@@ -22,9 +22,4 @@ public class SpringApp {
 	public static void close(int code) {
 		SpringApplication.exit(ctx, () -> code);
 	}
-	
-	@Bean
-	public HttpClient httpClient() {
-		return HttpClients.createMinimal();
-	}
 }

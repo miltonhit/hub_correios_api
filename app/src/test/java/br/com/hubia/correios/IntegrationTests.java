@@ -36,11 +36,6 @@ public class IntegrationTests {
 	private MockServerClient mockServerClient;
 	
 	@Test
-	public void a() {
-		assertEquals(1, 2);
-	}
-	
-	@Test
 	@Order(1)
 	public void testGetZipCodeWhenNotReady() throws Exception {
 		mockMvc.perform(get("/zip/03358150")).andExpect(status().is(503));

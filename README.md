@@ -21,8 +21,8 @@ Uma stack com Lambda e DynamoDB cairia muito bem também :)
 -> com.h2database
 
 ## Para buildar e executar
--> docker-compose up<br>
-**!!Importante!!** Ao buildar e subir a API, ela pode demora de 3 a 5 minutos para baixar todos os CEPs e inserir no MySQL.<br>
+-> docker-compose up<br><br>
+**Importante:** Ao buildar e subir a API, ela pode demora de 3 a 5 minutos para baixar todos os CEPs e inserir no MySQL.<br>
 Enquanto esse **setup** não termina, você vai receber o erro *503*, conforme exemplo abaixo.
 
 ## Exemplos para testar
@@ -50,3 +50,4 @@ Enquanto esse **setup** não termina, você vai receber o erro *503*, conforme e
 ```
 
 ###### curl http://localhost:6868/zip/9999999
+*204 No-Content*

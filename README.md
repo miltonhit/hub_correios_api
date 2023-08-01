@@ -1,5 +1,6 @@
 ## hub-correios-api
 API de fácil instalação para buscar qualquer cep Brasileiro :)<br>
+Esse projeto foi construido do ZERO nessa [playlist](https://www.youtube.com/playlist?list=PLghMA159zOSlmxr8UBn5YfNMc3NkcRoeW) de 4 vídeos. Deixe seu joinha xD 
 
 ## Conceito
 Basicamente, ao subir o container, ela baixa esse [csv](https://github.com/miltonhit/miltonhit/raw/main/public-assets/cep-20190602.csv) com 900k de endereços e salva na tabela 'correio.address' dentro do MySQL.<br>
